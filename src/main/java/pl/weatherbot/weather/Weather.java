@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Scanner;
+import com.vdurmont.emoji.EmojiParser;
 
 public class Weather {
     public static String getWeather(String city, Model model) throws IOException {
@@ -33,11 +34,11 @@ public class Weather {
             model.setMain((String) objects.get("main"));
         }
 
-        return "City: " + model.getName() + "\n" +
-                "Temperature: " + model.getTemp() + "°C" + "\n" +
-                "Humidity: " + model.getHumidity() + "%" + "\n" +
-                "Main: " + model.getMain() + "\n" +
-                "http://openweathermap.org/img/wn/" + model.getIcon() + ".png";
+        return EmojiParser.parseToUnicode(":city_sunrise:City: " + model.getName() + "\n" +
+                "\uD83C\uDF21️Temperature: " + model.getTemp() + "°C" + "\n" +
+                ":droplet:Humidity: " + model.getHumidity() + "%" + "\n" +
+                ":partly_sunny:Main: " + model.getMain() + "\n" +
+                "http://openweathermap.org/img/wn/" + model.getIcon() + ".png");
 
     }
 }

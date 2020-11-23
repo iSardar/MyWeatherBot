@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import pl.weatherbot.model.Model;
 import pl.weatherbot.weather.Weather;
+import com.vdurmont.emoji.EmojiParser;
 
 import java.io.IOException;
 
@@ -24,7 +25,7 @@ public class Bot extends TelegramLongPollingBot {
                 case "/start":
                     System.out.println("Request detected");
                     SendMessage sendWelcomeMessage = new SendMessage();
-                    sendWelcomeMessage.setText("Hello " + userName + " welcome to the weather bot!" + "\nProvide city to obtain current weather conditions");
+                    sendWelcomeMessage.setText(EmojiParser.parseToUnicode("Hello " + userName + ":wave: welcome to the weather bot!:partly_sunny:" + "\nProvide city to obtain current weather conditions:wink:"));
                     sendWelcomeMessage.setParseMode(ParseMode.MARKDOWN);
                     sendWelcomeMessage.setChatId(message.getChatId());
                     try {
@@ -44,7 +45,7 @@ public class Bot extends TelegramLongPollingBot {
                         sendWeather.setText(Weather.getWeather(city, model));
                     } catch (IOException e) {
                         try {
-                            execute(new SendMessage(chatId, "Incorrect city, try again"));
+                            execute(new SendMessage(chatId, EmojiParser.parseToUnicode(":red_circle:Incorrect city, try again")));
                         } catch (TelegramApiException telegramApiException) {
                             telegramApiException.printStackTrace();
                         }
@@ -59,10 +60,10 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public String getBotUsername() {
-        return "KorobkaObjebkaBot";
+        return "iSardar_WeatherBot";
     }
 
     public String getBotToken() {
-        return "1255739334:AAFvz8qRJ_ZswIRMbzWBS-KvSXcSdF_V-Gc";
+        return "1481496517:AAEatWnStPNQ-ssCsBr9Yqg3wbkFjGePlPw";
     }
 }
